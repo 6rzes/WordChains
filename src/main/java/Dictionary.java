@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Dictionary {
 
-    public void getRemoteFile(final String linkToRemoteFile, final String localFilename) {
+    protected void getRemoteFile(final String linkToRemoteFile, final String localFilename) {
         URL remoteFileURL = null;
         try {
             remoteFileURL = new URL(linkToRemoteFile);
@@ -27,7 +27,7 @@ public class Dictionary {
         }
     }
 
-    public List<String> getReducedWordList(final String localFileName, final Integer wordLength) {
+    protected List<String> getReducedWordList(final String localFileName, final Integer wordLength) {
         List<String> wordList = new ArrayList<>();
 
         File localFile = new File(localFileName);

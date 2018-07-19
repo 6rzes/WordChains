@@ -1,4 +1,8 @@
+package app.daoImpl;
+
+import app.dao.DictionaryDAO;
 import org.apache.commons.io.FileUtils;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,9 +11,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dictionary {
+@Component
+public class DictionaryDAOImpl implements DictionaryDAO {
 
-    protected void getRemoteFile(final String linkToRemoteFile, final String localFilename) {
+    private void getRemoteFile(final String linkToRemoteFile, final String localFilename) {
         URL remoteFileURL = null;
         try {
             remoteFileURL = new URL(linkToRemoteFile);
@@ -27,7 +32,8 @@ public class Dictionary {
         }
     }
 
-    protected List<String> getReducedWordList(final String localFileName, final Integer wordLength) {
+    public List<String> getReducedWordList(final String linkToRemoteFile, final String localFileName, final Integer wordLength) {
+        getRemoteFile(linkToRemoteFile,localFileName);
         List<String> wordList = new ArrayList<>();
 
         File localFile = new File(localFileName);

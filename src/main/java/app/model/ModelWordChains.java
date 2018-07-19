@@ -1,11 +1,16 @@
+package app.model;
+
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WordChains {
+@Component
+public class ModelWordChains {
 
     private static final int NEAREST_NODE = 1;
 
-    protected Boolean verifyWordsDiff(final String firstWord, final String secondWord, final Integer numDiff) {
+    private Boolean verifyWordsDiff(final String firstWord, final String secondWord, final Integer numDiff) {
         if (firstWord == null || secondWord == null || numDiff == null) {
             return null;
         }
@@ -17,38 +22,44 @@ public class WordChains {
         return count == numDiff;
     }
 
-    protected  List<String> getNeighbourNodes(final List<String> wordList, final String wordNode) {
+    private List<String> getNeighbourNodes(final List<String> wordList, final String wordNode) {
         return wordList.stream().filter(word -> verifyWordsDiff(word, wordNode, NEAREST_NODE)).collect(Collectors.toList());
     }
 
-    protected Map<String, String> getTranstionsMap(final List<String> words, final String initialWord, final String searchedWord) {
+    public Map<String, String> getTranstionsMap(final List<String> words, final String initialWord, final String searchedWord) {
         Queue<String> exploredWords = new LinkedList<>();
         Map<String, String> translationMap = new HashMap<>();
-        List<String> neighbourNodes;
         String word;
         exploredWords.add(initialWord);
-
         while (!exploredWords.isEmpty() && !(word = exploredWords.remove()).equals(searchedWord)) {
-            neighbourNodes = getNeighbourNodes(words,word);
+            List <String> neighbourNodes = getNeighbourNodes(words,word);
             for (String neighbour : neighbourNodes) {
-                 translationMap.put(neighbour, word);
-                 exploredWords.add(neighbour);
+                if(!translationMap.containsKey(neighbour))
+                    translationMap.put(neighbour, word);
+                exploredWords.add(neighbour);
             }
         }
         return translationMap;
     }
 
 
-    protected List<String> getPathWay(final Map<String,String> transitionMap, final String initialWord, final String searchedWord) {
+    public List<String> getPathWayFromTransition(final Map<String,String> transitionMap, final String initialWord, final String searchedWord) {
         String node = searchedWord;
         List<String> pathWay = new ArrayList();
-
         while (!node.equals(initialWord)){
             pathWay.add(0,node);
             node = transitionMap.get(node);
         }
         pathWay.add(0,initialWord);
+
         return pathWay;
     }
+
+    public List<String> getPathWay(final List<String> wordList, final String initialWord, final String searchedWord) {
+        Map <String, String> transitionMap = getTranstionsMap(wordList,initialWord,searchedWord);
+        return getPathWayFromTransition(transitionMap,initialWord,searchedWord);
+    }
+
+
 
 }

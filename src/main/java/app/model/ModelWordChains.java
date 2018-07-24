@@ -26,7 +26,7 @@ public class ModelWordChains {
         return wordList.stream().filter(word -> verifyWordsDiff(word, wordNode, NEAREST_NODE)).collect(Collectors.toList());
     }
 
-    public Map<String, String> getTranstionsMap(final List<String> words, final String initialWord, final String searchedWord) {
+    private Map<String, String> getTranstionsMap(final List<String> words, final String initialWord, final String searchedWord) {
         Queue<String> exploredWords = new LinkedList<>();
         Map<String, String> translationMap = new HashMap<>();
         String word;
@@ -43,7 +43,7 @@ public class ModelWordChains {
     }
 
 
-    public List<String> getPathWayFromTransition(final Map<String,String> transitionMap, final String initialWord, final String searchedWord) {
+    private List<String> getPathWayFromTransition(final Map<String,String> transitionMap, final String initialWord, final String searchedWord) {
         String node = searchedWord;
         List<String> pathWay = new ArrayList();
         while (!node.equals(initialWord)){

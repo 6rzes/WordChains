@@ -1,6 +1,6 @@
-package app.serviceImpl;
+package app.serviceimpl;
 
-import app.dao.DictionaryDAO;
+import app.daoimpl.DictionaryDAOImpl;
 import app.service.ServiceDictionary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 public class ServiceDictionaryImpl implements ServiceDictionary {
 
     @Autowired
-    private DictionaryDAO dictionaryDAO;
+    private DictionaryDAOImpl dictionaryDAO;
 
     @Override
     public List<String> getReducedWordList(final String linkToRemoteFile, final String localFileName, final Integer wordLength) {

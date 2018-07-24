@@ -26,11 +26,9 @@ public class ControllerWordChains {
     @GetMapping(value = "/")
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody List<String> getWordPath(
-            @RequestParam(value = "initialWord", required = false) String initialWord,
-            @RequestParam(value = "lastWord",required = false) String lastWord
-    ) {
+            @RequestParam(value = "initialWord", required = true) String initialWord,
+            @RequestParam(value = "lastWord",required = true) String lastWord) {
         List <String> wordList = serviceDictionary.getReducedWordList(LINK_TO_REMOTE_FILE, LOCAL_FILE_NAME, initialWord.length());
         return serviceWordChains.getPathWay(wordList,initialWord,lastWord);
     }
-
 }

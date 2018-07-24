@@ -1,4 +1,4 @@
-package app.daoImpl;
+package app.daoimpl;
 
 import app.dao.DictionaryDAO;
 import org.apache.commons.io.FileUtils;
@@ -23,7 +23,7 @@ public class DictionaryDAOImpl implements DictionaryDAO {
         }
 
         File localFile = new File(localFilename);
-        if (!localFile.exists()) {
+        if (!localFile.exists() && remoteFileURL!= null) {
             try {
                 FileUtils.copyURLToFile(remoteFileURL, localFile);
             } catch (IOException e) {

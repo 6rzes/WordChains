@@ -44,6 +44,10 @@ public class ModelWordChains {
 
 
     private List<String> getPathWayFromTransition(final Map<String,String> transitionMap, final String initialWord, final String searchedWord) {
+        if (transitionMap == null || transitionMap.size()==0 || initialWord==null || searchedWord==null) {
+            return null;
+        }
+
         String node = searchedWord;
         List<String> pathWay = new ArrayList();
         while (!node.equals(initialWord)){

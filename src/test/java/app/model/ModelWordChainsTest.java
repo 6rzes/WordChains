@@ -18,8 +18,9 @@ class ModelWordChainsTest {
 
     @Test
     void testGetPathWay() {
-        List <String> transitionList = List.of("iwo","two", "owx", "twx", "twx", "two", "two", "iwo");
+        List<String> transitionList = List.of("iwo", "two", "owx", "twx", "twx", "two", "two", "iwo", "*&#@$#",
+                ")(()*&^", "         ", "  ", "456", "AAA", "zzz");
         List<String> expectedPath = Arrays.asList("two", "twx", "owx");
-        Assert.assertEquals(expectedPath, modelWordChains.getPathWay(transitionList,"two","owx"));
+        Assert.assertEquals(expectedPath, modelWordChains.getPathWay(transitionList, "two", "owx"));
     }
 }
